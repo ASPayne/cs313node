@@ -3,7 +3,7 @@ var router = express.Router();
 const pg = require('pg')
 var conString = "postgres://qofbggsapgbgtx:362d864eeb0f6d8d06b00c1ffda03b81419ebdd21e945acaedb1f9d71b690896@ec2-54-83-1-101.compute-1.amazonaws.com:5432/dcidfrniod064s?ssl=true"
 
-
+/*
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 require("dotenv").config();
@@ -31,7 +31,7 @@ app.get("/home", function() {
   console.log("recived a request for the home page");
 });
 
-/* app.get("/getPerson", function(req, res) {
+ app.get("/getPerson", function(req, res) {
 
     var sql = "SELECT first_name FROM person where id = $1";
 
