@@ -1,0 +1,34 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+1. Copy and paste the URL for your web application:
+See attachments
+
+2. Copy and paste the URL for your source code repository (e.g., GitHub):
+See attachments
+
+3. Briefly list and describe the elements of the application that are functioning. Include any special instructions about how to login and/or use your application.
+I am able to call functions and pass variables. I was unable to get any more don than this
+
+4. Briefly describe any pieces of the assignment that are not yet working correctly.
+have not done any math to calculate postage cost
+
+5. Briefly describe the "coolest" thing you learned while completing this assignment.
+It is easier to pass variable this way
+
+6. In your own words, briefly describe the concept of a callback function and why it is useful.
+A callback function is a function called inside another function to provide more data to the parent function. In the control-view organization, the controller calls a function that returns the view of a page.
+
+7. Please select the category you feel best describes your assignment:
+1 - Some attempt was made
+2 - Developing, but significantly deficient
+3 - Slightly deficient, but still mostly adequate
+4 - Meets requirements
+5 - Shows creativity and excels above and beyond requirements
+3
+
+8. Provide a brief justification (1-2 sentences) for selecting that category.
+Did not complete everything.
+
+Attached are my files that are related to the assignment. I have not had time to get them running on Heroku.
+
+
