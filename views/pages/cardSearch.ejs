@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cardSearch</title>
+</head>
+
+<body>
+    <form id="queryform" method="GET" action="" onsubmit="submitQuery()">
+        search card name: <input id="cardsearch" name="cardnamesearch">
+
+        <input type="submit" value="search">
+        <div id="listofcards">Searches may take time before anything shows up.</div>
+        <div id="loader"></div>
+    </form>
+    <br>
+    <hr>
+    <br>
+    <div id="cardSearchList"></div>
+    </div>
+
+</body>
+
+
+<script>
+    function submitQuery() {
+        var query = document.getElementById('cardsearch').value;
+        fetch('/scryfall/cardquery?cardnamesearch=' + query, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) { throw response; }
+                // fetch also returns a stream as the result...we have to tell it
+                // how to format the stream...our choices are: json, text, or blob (binary data)
+                console.log('first .then function');
+                return response.json();
+                // the json() method also returns a promise...so we need
+                //to call .then() on it as well (shown on the next line)
+            })
+            .then(function (data) {
+                console.log('second .then function');
+                        // console.log(JSON.stringify(myJson));
+                // we now have our data and can use it to update our page.
+                document.getElementById('cardSearchList').innerHTML = displaylist(data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
+
+
+    function displaylist(arr) {
+        console.log("\n\nUpdateResultList");
+        var out = "";
+        var i;
+
+        out += '<table id="cardlist" style="width:auto">';
+        out += "<th>Card Name</th>";
+        out += "<th>ManaCost</th>";
+
+        for (i in arr.data) {
+            out += "<tr>";
+            out += "<td>" + arr.data[i].name + "</td>";
+            out += "<td>" + arr.data[i].mana_cost + "</td>";
+            out += "</tr>";
+        }
+        out += "</table>";
+        return out;
+    } 
+</script>
+
+
+
+</html>
