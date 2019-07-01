@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require('path')
+const PORT = process.env.PORT || 5000
 var request = require("request");
 var app = express();
 
@@ -18,9 +20,7 @@ app.get("/home", function() {
   console.log("recived a request for the home page");
 });
 
-app.listen(5005, function() {
-  console.log("server open. Listening on port 5005");
-});
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get("/cardSearch", function(req, res) {
   console.log("recived a request to return the page to search for cards");
