@@ -28,6 +28,7 @@
 <script>
     function submitQuery() {
         var query = document.getElementById('cardsearch').value;
+        console.log('trying to query for ' + query);
         fetch('/scryfall/cardquery?cardnamesearch=' + query, {
             method: 'GET'
         })
