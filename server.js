@@ -5,26 +5,25 @@ var request = require("request");
 var app = express();
 
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "modules")));
 
 app.set("views", "views");
 app.set("view engine", "ejs");
 
-app.get("/", function(req, res) {
-  console.log("recived a request for /");
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
+app.get("/", function(req, res) {
   res.write("sending back root");
   res.end();
 });
 
 app.get("/home", function() {
-  console.log("recived a request for the home page");
+  //console.log("recived a request for the home page");
 });
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.get("/cardSearch", function(req, res) {
   console.log("recived a request to return the page to search for cards");
-
   res.render("pages/cardSearch");
   res.end();
 });

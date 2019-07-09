@@ -2,79 +2,57 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>cardSearch</title>
+  <% include ../partials/header.ejs %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cardSearch</title>
 </head>
 
 <body>
-    <form id="queryform" method="GET" action="" onsubmit="submitQuery()">
-        search card name: <input id="cardsearch" name="cardnamesearch">
+  <% include ../partials/nav.ejs %>
 
-        <input type="submit" value="search">
-        <input type="button" value="button" onclick="submitQuery()">
-        <div id="listofcards">Searches may take time before anything shows up.</div>
-        <div id="loader"></div>
-    </form>
-    <br>
-    <hr>
-    <br>
-    <div id="cardSearchList"></div>
+
+  <div class="row">
+    <div class="col s3" style="overflow-y: scroll; padding-bottom: 84px"><br>
+      <div class="row">
+        <div class="input-field col s8">
+          <input id="cardsearch" type="text">
+          <label class="active" for="first_name2">name a card to search for</label>
+        </div>
+        <a class="waves-effect waves-light btn-large blue darken-5 white-text" onclick="submitQuery()">SEARCH</a>
+      </div>
+      <hr>
+      <br>
+      <div id="listcontainer">
+        <div id="spinner" class="preloader-wrapper big" style="display: none">
+          <div class="spinner-layer">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div>
+
+            <div class="gap-patch">
+              <div class="circle"></div>
+            </div>
+
+            <div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <div id="cardSearchList"></div>
+      </div>
     </div>
+    <div class="col s9">
+      <div id="cardview"></div>
+    </div>
+  </div>
+  <div style="clear: both"></div>
+
+  <!-- footer -->
+  <% include ../partials/footer.ejs %>
+  <script src="cardSearchViewController.js"></script>
 
 </body>
-
-
-<script>
-    function submitQuery() {
-        var query = document.getElementById('cardsearch').value;
-        console.log('trying to query for ' + query);
-        fetch('/scryfall/cardquery?cardnamesearch=' + query, {
-            method: 'GET'
-        })
-            .then(response => {
-                if (!response.ok) { throw response; }
-                // fetch also returns a stream as the result...we have to tell it
-                // how to format the stream...our choices are: json, text, or blob (binary data)
-                console.log('first .then function');
-                return response.json();
-                // the json() method also returns a promise...so we need
-                //to call .then() on it as well (shown on the next line)
-            })
-            .then(function (data) {
-                console.log('second .then function');
-                        // console.log(JSON.stringify(myJson));
-                // we now have our data and can use it to update our page.
-                document.getElementById('cardSearchList').innerHTML = displaylist(data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
-
-
-    function displaylist(arr) {
-        console.log("\n\nUpdateResultList");
-        var out = "";
-        var i;
-
-        out += '<table id="cardlist" style="width:auto">';
-        out += "<th>Card Name</th>";
-        out += "<th>ManaCost</th>";
-
-        for (i in arr.data) {
-            out += "<tr>";
-            out += "<td>" + arr.data[i].name + "</td>";
-            out += "<td>" + arr.data[i].mana_cost + "</td>";
-            out += "</tr>";
-        }
-        out += "</table>";
-        return out;
-    } 
-</script>
-
-
 
 </html>
