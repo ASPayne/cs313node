@@ -36,6 +36,9 @@ body {
   background-color: #f2f1f0;
   color: #3c3c3c;
   margin: auto;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 main {
@@ -130,6 +133,7 @@ ul.navbar li.navitem.login li.navitem.active {
 
 /* Style the footer */
 .footer {
+  margin-top: 10px;
   height: auto;
   background-color: #4c4c4c;
   color: #f2f1f0;

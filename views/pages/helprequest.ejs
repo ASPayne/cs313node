@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/header.ejs %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cardSearch</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <% include ../partials/nav.ejs %>
+    <div class="container col s12 m12 l12" style="margin: auto">
+            <div class="input-field white">
+                <select id="labselector">
+                    <option value="" disabled selected>What lab do you need help with?</option>
+                    <option value="1">Lab 1</option>
+                    <option value="2">Lab 2</option>
+                    <option value="3">Lab 3</option>
+                    <option value="4">Lab 4</option>
+                    <option value="5">Lab 5</option>
+                    <option value="6">Lab 6</option>
+                    <option value="7">Lab 7</option>
+                    <option value="8">Lab 8</option>
+                    <option value="9">Lab 9</option>
+                    <option value="10">Lab 10</option>
+                    <option value="11">Lab 11</option>
+                    <option value="12">Lab 12</option>
+                    <option value="13">Lab 13</option>
+                    <option value="14">Lab 14</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="helpdescription" class="materialize-textarea"></textarea>
+                    <label for="helpdescription">what do you need help with?</label>
+                </div>
+            </div>
+            <a class="btn waves-effect waves-light" onclick="helpRequestSubmit()">Request Help
+            </a>
+        <div id="status"></div>
+       <!--  <form action="/helprequestsubmit" target="_blank" method="POST">
+            First name:<br>
+            <input type="text" name="firstname" value="Mickey">
+            <br>
+            Last name:<br>
+            <input type="text" name="lastname" value="Mouse">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form> -->
+    </div>
+    <% include ../partials/footer.ejs %>
+    <script src="queueController.js"></script>
+
+</body>
+
+</html>
