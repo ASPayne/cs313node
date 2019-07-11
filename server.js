@@ -19,7 +19,7 @@ app.use(bodyparse.urlencoded({ extended: false }));
 app.use(
   session({
     secure: true,
-    secret: "America"
+    secret: "Canada: America's hat"
   })
 );
 
@@ -65,7 +65,7 @@ app.get("/scryfall/cardquery", function(req, res) {
 });
 
 app.get("/testquery", function(req, res) {
-  var sql = "SELECT * FROM cardstorage";
+  var sql = "SELECT * FROM person";
   var data = pool.query(sql, function(err, result) {
     // If an error occurred...
     if (err) {
