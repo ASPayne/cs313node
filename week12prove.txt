@@ -1,0 +1,33 @@
+After completing the assignment, please answer the questions in this text file and submit it to I-Learn.
+
+. Project title / one sentence description:
+Help Queue and card query / an implementation of a help queue with a bonus MTG card query to implement an API.
+
+2. Copy and paste the URL for your site at Heroku:
+https://powerful-hollows-59648.herokuapp.com/
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/ASPayne/cs313node
+
+4. Describe the functionality that is currently working, along with any special instructions of how to use your web application:
+login is working. use vir14785 as username and cangetin as password
+viewing the queue
+creating a new help request
+
+5. Describe the features that are not yet working correctly.
+creating a new user account.
+
+6. Please select the category you feel best describes your assignment:
+1 - Some attempt was made
+2 - Developing, but significantly deficient
+3 - Slightly deficient, but still mostly adequate
+4 - Meets requirements
+5 - Shows creativity and excels above and beyond requirements
+4
+
+7. Provide a brief justification (1-2 sentences) for selecting that category.
+I was finally able to find time to work on this project. database is working (at leat on my local computer)
+Most of all functionality is working.
+
+8. Please list any questions you have for the instructor regarding this assignment or this week's topic.
+none
