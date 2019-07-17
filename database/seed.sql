@@ -1,4 +1,4 @@
-INSERT INTO person(
+/* INSERT INTO person(
 id             	
 ,first_name       	
 ,last_name     	
@@ -44,4 +44,27 @@ Values(
     , (select id from person WHERE first_name = 'Virgil' and last_name = 'Ewell')
     , (select id from person WHERE first_name = 'Chana' and last_name = 'Arrant')
     ,(select id from person WHERE first_name = 'Janina' and last_name = 'Ewell')
-);
+); */
+
+INSERT INTO public.user(
+id             	
+,first_name       	
+,last_name     	
+,email
+,password
+,usertype
+)
+VALUES(DEFAULT, 'Bruce', 'Virgil', 'vir14785', 'cangetin', 'assistant'),
+(DEFAULT, 'Dean','Burdo', 'bur12445', 'DBcangetin', 'student'),
+(DEFAULT, 'Virgil','Ewell', 'ewe14005', 'VEcangetin', 'student'),
+(DEFAULT, 'Zack','Parkerson', 'par16009', 'ZPcangetin', 'student');
+
+INSERT INTO public.requests(
+    id
+    ,request_by
+    ,issue_description
+    ,lab_number
+    ,helped_status
+    ,request_timestamp
+)
+VALUES (DEFAULT, 2, 'this is a test', 1, 'no', now());

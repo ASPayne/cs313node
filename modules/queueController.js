@@ -11,9 +11,23 @@ function helpRequestSubmit(){
 	$.post("/helprequestsubmit", params, function(result) {
         if (result && result.success) {
             window.location.href = "/queue";
-			$("#status").text("Successfully logged out.");
+			$("#status").text("Help request made");
 		} else {
-			$("#status").text("Error logging out.");
+			$("#status").text("Error putting request on queue.");
+		}
+    });
+}
+
+
+function removefromqueue(help_id){
+	var params = {requestID: help_id}
+	$.post("/helprequestremove", params, function(result) {
+        if (result && result.success) {
+			getQueueJsonList();
+			/* window.location.href = "/queue"; */
+			$("#status").text("Removed from queue.");
+		} else {
+			$("#status").text("Error removing from queue.");
 		}
     });
 }

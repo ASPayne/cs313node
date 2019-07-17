@@ -26,7 +26,7 @@
 					<span class="card-title">LOGIN</span>
 <!-- 					<p>I am a very simple card. I am good at containing small bits of information.
 						I am convenient because I require little markup to use effectively.</p> -->
-						<input type="text" id="username" placeholder="username">
+						<input type="text" id="email" placeholder="email">
 						<input type="password" id="password" placeholder="password">
 				</div>
 				<div class="card-action center">
@@ -36,10 +36,11 @@
 					<button onclick="logout();">Log out</button>
 				</div>
 			</div>
+			<p id="status"></p>
 		</div>
 	</div>
 	<% include ../partials/footer.ejs %>
-	<script src="test.js"></script>
+	<script src="login.js"></script>
 </body>
 
 </html>

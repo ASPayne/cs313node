@@ -29,12 +29,23 @@ app.set("view engine", "ejs");
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 app.get("/", function(req, res) {
-  res.write("sending back root");
+
+ /*  var firstNum = req.query.num1;
+  var secondNum = req.query.num2;
+  var opp = req.query.opper;
+  var value = doMath(firstNum, secondNum, opp);
+
+  var params = { first: firstNum, second: secondNum, opper: opp, total: value };
+  res.render("pages/math", params); */
+  res.render("pages/home", {username: ""});
+  /* res.write("sending back root"); */
   res.end();
 });
 
 app.get("/home", function() {
   //console.log("recived a request for the home page");
+  res.render("pages/home");
+  res.end();
 });
 
 app.get("/cardSearch", function(req, res) {
@@ -65,7 +76,7 @@ app.get("/scryfall/cardquery", function(req, res) {
 });
 
 app.get("/testquery", function(req, res) {
-  var sql = "SELECT * FROM person";
+  var sql = "SELECT * FROM requests";
   var data = pool.query(sql, function(err, result) {
     // If an error occurred...
     if (err) {
@@ -76,7 +87,9 @@ app.get("/testquery", function(req, res) {
     // Log this to the console for debugging purposes.
     console.log("Back from DB with result:");
     console.log(result.rows);
+    res.json(data);
   });
+
   res.json(data);
   res.end();
 });
@@ -93,7 +106,33 @@ app.get("/login", function(req, res) {
 
 app.get("/queue", function(req, res) {
   res.render("pages/queue");
+
   res.end();
+});
+
+app.get("/HelpQueueList", function(req, res) {
+  var sql = "SELECT r.id, u.first_name, u.last_name, r.issue_description, ";
+  sql += "r.lab_number, r.request_timestamp ";
+  sql +=
+    "FROM public.requests r inner join public.user u on r.helped_status = 'no' ";
+  sql += "and u.id = r.request_by";
+  var data = pool.query(sql, function(err, result) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ");
+      console.log(err);
+    }
+
+    // Log this to the console for debugging purposes.
+    console.log("Back from DB with result:");
+    console.log(result.rows);
+    var returndata = { assistant: req.session.assistant, queue: result.rows };
+
+    res.json(returndata);
+    /* res.end(); */
+  });
+  /*   res.json(data);
+  res.end(); */
 });
 
 app.get("/helprequest", function(req, res) {
@@ -101,30 +140,90 @@ app.get("/helprequest", function(req, res) {
   res.end();
 });
 
-app.post("/helprequestsubmit", function(req, res) {
+app.post("/helprequestsubmit", verifyLogin, function(req, res) {
   console.log(req.body);
-  if (req.body) {
+  console.log(req.session);
+
+  var userid = req.session.username;
+  var issue = req.body.helpDescription;
+  var labnum = req.body.labnumber;
+
+  var sql = "INSERT INTO public.requests(";
+  sql += " id, request_by, issue_description, lab_number, ";
+  sql += "helped_status, request_timestamp) ";
+  sql += "VALUES (DEFAULT, ";
+  sql +=
+    " (select u.id from public.user u where u.email = '" + userid + "'), ";
+  sql += "'" + issue + "',";
+  sql += labnum + ", ";
+  sql += "'no', now())";
+  console.log("query = " + sql);
+  pool.query(sql, function(err, result) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ");
+      console.log(err);
+      res.json({ success: false });
+    }
+    // Log this to the console for debugging purposes.
+    console.log("Inserted values with no errors");
     res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  }
+  });
+});
+
+app.post("/helprequestremove", verifyLogin, function(req, res) {
+
+  var sql = "UPDATE public.requests ";
+  sql += "set request_closed_timestamp = now(), helped_status = 'yes' ";
+  sql += "where id = " + req.body.requestID +";";
+  console.log("query = " + sql);
+  pool.query(sql, function(err, result) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ");
+      console.log(err);
+      res.json({ success: false });
+    }
+    // Log this to the console for debugging purposes.
+    console.log("Inserted values with no errors");
+    res.json({ success: true });
+  });
 });
 
 app.post("/login", function(req, res) {
   console.log(req.body);
-  var username = req.body.username;
+  var username = req.body.useremail;
   var password = req.body.password;
   var success = false;
   console.log(
     "recived data\nUsername: " + username + "\nPassword: " + password
   );
 
-  if (username == "admin" && password == "password") {
-    success = true;
-    req.session.username = username;
-  }
+  var sql = "SELECT * FROM public.user";
+  sql += " WHERE email = '" + username + "'";
+  sql += " and password = '" + password + "';";
 
+  console.log(sql);
+  var data = pool.query(sql, function(err, result) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ");
+      console.log(err);
+    } else if (isEmpty(result)) {
+      console.log("No rows selected");
+    } else {
+      console.log("Back from DB with result:");
+      console.log(result.rows);
+      success = true;
+      req.session.username = result.rows[0].email;
+      req.session.flname =
+        result.rows[0].first_name + " " + result.rows[0].last_name;
+      if (result.rows[0].usertype == "assistant") {
+        req.session.assistant = true;
+      }
+    }
   res.json({ success: success });
+  });
 });
 
 app.post("/logout", function(req, res) {
@@ -168,4 +267,10 @@ function logRequest(request, response, next) {
 
   // don't forget to call next() to allow the next parts of the pipeline to function
   next();
+}
+function isEmpty(obj) {
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) return false;
+  }
+  return true;
 }

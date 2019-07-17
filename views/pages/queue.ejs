@@ -6,14 +6,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>cardSearch</title>
+  <title>Help Queue</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="queueViewer.js"></script>
 </head>
 
 <body>
   <% include ../partials/nav.ejs %>
+  <a class="waves-effect waves-light btn-large col s2 m3 l4" onclick="getQueueJsonList()">refresh</a>
+  <div id="queueView"></div>
 
-  <h1>view the current queue.....</h1>
+  <% include ../partials/footer.ejs %>
 
-  <% include ../partials/footer.ejs %>   
+  <script type="text/javascript" src="queueController.js"></script>
+  <script>getQueueJsonList()</script>
 </body>
 </html>

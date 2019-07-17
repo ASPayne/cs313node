@@ -1,16 +1,17 @@
 function login() {
-	var username = $("#username").val();
+	var email = $("#email").val();
 	var password = $("#password").val();
 
-	console.log("in function\n" + username +"\n"+password);
+	console.log("in function\n" + email +"\n"+password);
 	var params = {
-		username: username,
+		useremail: email,
 		password: password
 	};
 
 	$.post("/login", params, function(result) {
 		if (result && result.success) {
 			$("#status").text("Successfully logged in.");
+			window.location.href = "/queue";
 		} else {
 			$("#status").text("Error logging in.");
 		}
