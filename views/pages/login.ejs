@@ -10,33 +10,39 @@
 
 <body>
 	<% include ../partials/nav.ejs %>
-	<!-- <div class="col s6 offset-s6">
-		<input type="text" id="username" placeholder="username"><br>
-		<input type="password" id="password" placeholder="password"><br>
-		<button onclick="login();">Log in</button>
-		<button onclick="logout();">Log out</button><br>
-		<br>
-		<button onclick="getServerTime()">Get server time</button>
-		<div id="status"></div>
-	</div> -->
 	<div class="row">
-		<div class="col s12 m6 offset-m3">
+		<div class="col s12 m10 l10 offset-m3">
 			<div class="card blue-grey darken-1">
 				<div class="card-content white-text">
 					<span class="card-title">LOGIN</span>
-<!-- 					<p>I am a very simple card. I am good at containing small bits of information.
-						I am convenient because I require little markup to use effectively.</p> -->
-						<input type="text" id="email" placeholder="email">
-						<input type="password" id="password" placeholder="password">
-				</div>
-				<div class="card-action center">
-					<!-- <a href="#">This is a link</a> -->
-					<button onclick="login();">Log in</button>
-					<!-- <a href="#">This is a link</a> -->
-					<button onclick="logout();">Log out</button>
+					<input type="text" id="email" placeholder="email">
+					<input type="password" id="password" placeholder="password">
+					<div class="row card-action center">
+						<button onclick="login();">Log in</button>
+						<button onclick="logout();">Log out</button>
+					</div>
 				</div>
 			</div>
 			<p id="status"></p>
+			<button onclick="getnewuserform()"></button>
+		</div>
+	</div>
+	<div class="row" id="newuserform">
+		<div class="col s12 m10 l10 offset-m3">
+			<div class="card blue-grey darken-1">
+				<div class="card-content white-text">
+					<span class="card-title">LOGIN</span>
+					<input type="text" id="fname" placeholder="firstname">
+					<input type="text" id="lname" placeholder="lastname">
+					<input type="text" id="newEmail" placeholder="BYU-I email">
+					<input type="password" id="newPassword" placeholder="password">
+					<div class="row card-action center">
+						<button onclick="createnewuser()">Log in</button>
+					</div>
+				</div>
+			</div>
+			<p id="status"></p>
+			<!-- <button onclick="getnewuserform()"></button> -->
 		</div>
 	</div>
 	<% include ../partials/footer.ejs %>

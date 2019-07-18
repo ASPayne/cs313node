@@ -209,7 +209,7 @@ app.post("/login", function(req, res) {
     if (err) {
       console.log("Error in query: ");
       console.log(err);
-    } else if (isEmpty(result)) {
+    } else if (isEmpty(result) || result == '[]') {
       console.log("No rows selected");
     } else {
       console.log("Back from DB with result:");
@@ -234,6 +234,38 @@ app.post("/logout", function(req, res) {
   } else {
     res.json({ success: false });
   }
+});
+
+app.post("/createuser", function(req, res) {
+  var fname = req.body.fname;
+  var lname = req.body.lname;
+  var email = req.body.useremail;
+  var password = req.body.password;
+
+  var sql = "INSERT INTO public.user(\n";
+  sql += "id, first_name, last_name, email, password, usertype\n)\n";
+  sql += "VALUES(DEFAULT, '" + fname + "', '" + lname + "', '" + email + "', '" + password + "', 'student');";
+  console.log("query = " + sql);
+  pool.query(sql, function(err, result) {
+    // If an error occurred...
+    if (err) {
+      console.log("Error in query: ");
+      console.log(err);
+      res.json({ success: false });
+    }
+    // Log this to the console for debugging purposes.
+    console.log("Inserted values with no errors");
+    res.json({ success: true });
+  });
+
+
+  /* if (req.session.username) {
+    console.log("logging out " + req.session.username);
+    req.session.destroy();
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  } */
 });
 
 app.get("/getServerTime", verifyLogin, getServerTime);

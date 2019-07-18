@@ -39,3 +39,28 @@ function getServerTime() {
 		$("#status").text("Could not get server time.");
 	});
 }
+
+
+function createnewuser() {
+	var fname = $("#fname").val();
+	var lname = $("#lname").val();
+	var email = $("#newEmail").val();
+	var password = $("#newPassword").val();
+
+	console.log("Creating user \n" + fname + "\n" + lname);
+	var params = {
+		fname: fname,
+		lname: lname,
+		useremail: email,
+		password: password
+	};
+
+	$.post("/createuser", params, function (result) {
+		if (result && result.success) {
+			$("#status").text("Successfully logged in.");
+			window.location.href = "/login";
+		} else {
+			$("#status").text("Error creating user.");
+		}
+	});
+}
