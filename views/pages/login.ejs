@@ -10,7 +10,7 @@
 
 <body>
 	<% include ../partials/nav.ejs %>
-	<div class="row">
+	<div class="row" id="userlogin">
 		<div class="col s12 m10 l10 offset-m3">
 			<div class="card blue-grey darken-1">
 				<div class="card-content white-text">
@@ -24,20 +24,20 @@
 				</div>
 			</div>
 			<p id="status"></p>
-			<button onclick="getnewuserform()"></button>
+			<!-- <button onclick="getnewuserform()"></button> -->
 		</div>
 	</div>
 	<div class="row" id="newuserform">
 		<div class="col s12 m10 l10 offset-m3">
 			<div class="card blue-grey darken-1">
 				<div class="card-content white-text">
-					<span class="card-title">LOGIN</span>
+					<span class="card-title">NEW USER? -Sign up here</span>
 					<input type="text" id="fname" placeholder="firstname">
 					<input type="text" id="lname" placeholder="lastname">
 					<input type="text" id="newEmail" placeholder="BYU-I email">
 					<input type="password" id="newPassword" placeholder="password">
 					<div class="row card-action center">
-						<button onclick="createnewuser()">Log in</button>
+						<button onclick="createnewuser()">create account</button>
 					</div>
 				</div>
 			</div>

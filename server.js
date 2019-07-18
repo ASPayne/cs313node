@@ -29,21 +29,11 @@ app.set("view engine", "ejs");
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 app.get("/", function(req, res) {
-
- /*  var firstNum = req.query.num1;
-  var secondNum = req.query.num2;
-  var opp = req.query.opper;
-  var value = doMath(firstNum, secondNum, opp);
-
-  var params = { first: firstNum, second: secondNum, opper: opp, total: value };
-  res.render("pages/math", params); */
   res.render("pages/home", {username: ""});
-  /* res.write("sending back root"); */
   res.end();
 });
 
 app.get("/home", function() {
-  //console.log("recived a request for the home page");
   res.render("pages/home");
   res.end();
 });
@@ -117,22 +107,17 @@ app.get("/HelpQueueList", function(req, res) {
     "FROM public.requests r inner join public.user u on r.helped_status = 'no' ";
   sql += "and u.id = r.request_by";
   var data = pool.query(sql, function(err, result) {
-    // If an error occurred...
     if (err) {
       console.log("Error in query: ");
       console.log(err);
     }
 
-    // Log this to the console for debugging purposes.
     console.log("Back from DB with result:");
     console.log(result.rows);
     var returndata = { assistant: req.session.assistant, queue: result.rows };
 
     res.json(returndata);
-    /* res.end(); */
   });
-  /*   res.json(data);
-  res.end(); */
 });
 
 app.get("/helprequest", function(req, res) {
@@ -257,15 +242,6 @@ app.post("/createuser", function(req, res) {
     console.log("Inserted values with no errors");
     res.json({ success: true });
   });
-
-
-  /* if (req.session.username) {
-    console.log("logging out " + req.session.username);
-    req.session.destroy();
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
-  } */
 });
 
 app.get("/getServerTime", verifyLogin, getServerTime);
@@ -276,18 +252,10 @@ function getServerTime(request, response) {
   var result = { success: true, time: time };
   response.json(result);
 }
-
-// This is a middleware function that we can use with any request
-// to make sure the user is logged in.
 function verifyLogin(request, response, next) {
   if (request.session.username) {
-    // They are logged in!
-
-    // pass things along to the next function
     next();
   } else {
-    // They are not logged in
-    // Send back an unauthorized status
     var result = { success: false, message: "Access Denied" };
     response.status(401).json(result);
   }
