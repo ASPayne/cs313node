@@ -1,0 +1,60 @@
+After completing your final project, please answer the questions in this text file and submit it to I-Learn.
+
+1. Project title / one sentence description:
+Help Queue and card query / an implementation of a help queue with a bonus MTG card query to implement an API.
+
+2. Copy and paste the URL for your site at Heroku:
+https://powerful-hollows-59648.herokuapp.com/
+
+3. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/ASPayne/cs313node
+
+4. Please provide a brief description of what your project does and how to use the application. Make sure to include any required information like a username and password.
+login is working. use vir14785 as username and cangetin as password
+viewing the queue
+creating a new help request
+creating a new user
+adding and removing help requests
+
+5. Briefly describe any pieces of the assignment that are not yet working correctly.
+organization of UI.
+
+
+--------------------------------
+Project Self-assessment
+--------------------------------
+
+For each of the following requirements, please replace the "(YES/NO)" with either "YES" or "NO" as to whether or not your work met this requirement.
+
+Requirements
+------------
+(YES) 1. Your web application is running in Heroku.
+(YES) 2. Your latest source code is in GitHub.
+(YES) 3. Your web application is hosted on Node.js.
+(YES) 4. Your web application exposes one or more web services in Node.js.
+(YES) 5. Your web application consumes one or more of your web services from the browser.
+(YES) 6. Your web application has a data layer of either a database or third-party web service.
+
+For each of the following criteria, please replace the "(1-5)" with either the "1", "2", "3", "4", or "5" category you feel best describes your work.
+
+Categories
+----------
+1 - Some attempt was made
+2 - Developing, but significantly deficient
+3 - Slightly deficient, but still mostly adequate
+4 - Meets requirements
+5 - Shows creativity and excels above and beyond requirements
+
+Criteria
+----------
+(3) 1. Professional look and feel.
+(4) 2. Accomplishes a meaningful/interesting task.
+(4) 3. Demonstrates skill with HTML, CSS, and JavaScript.
+(3) 4. Demonstrates skill with Node.js.
+(4) 5. Demonstrates skill with Express.
+(4) 6. Demonstrates skill with web services.
+(4) 7. Demonstrates skill with client/server communication.
+(3) 8. Overall project evaluation.
+
+9. Finally, please provide an overall description/justification of the categories you selected.
+After three weeks of being unable to find time to work on this project, I crammed large amounts of time late into the night to work on this. This hurt my ability to create clean functional code for in hopes to make my code do what it is meant to do. My site has met my own requirements, but is still lacking in UI and organization.
